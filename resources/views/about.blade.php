@@ -28,7 +28,7 @@
                 Object: methods of automated payment on the Internet, network payment management technologies.
             </p>
             <p>
-                Subject: ¬ hardware and software complex of automated payment acceptance based on Raspberry Pi using Laravel framework and PHP programming language.
+                Subject: hardware and software complex of automated payment acceptance based on Raspberry Pi using Laravel framework and PHP programming language.
             </p>
             <p>
                 To achieve this goal it is necessary to solve the following tasks of the bachelor's thesis:

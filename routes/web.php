@@ -44,6 +44,12 @@ Route::get('/about', [MainController::class, 'about'])->name('about.index');
 // --- Logged
 Route::middleware(['auth'])->group(function () {
     Route::get('/subscription', [SubscriptionController::class, 'index'])->name('subscription.index');
+
+    // --- AJAX Subscription
+    Route::post('/create-payment', [SubscriptionController::class, 'createPaymentSubscription'])->name('subscription.create');
+    Route::post('/set-subscription', [SubscriptionController::class, 'setSubscription'])->name('subscription.set');
+
+
 });
 
 // --- Webhook

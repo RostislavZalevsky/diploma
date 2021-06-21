@@ -21,9 +21,14 @@
             <div class="col"><a href="{{ route('subscription.index') }}" class="btn btn-danger">Select</a></div>
         </div>
         <div class="row text-center border-top h3 py-2 mt-2 mb-0">
-            <div class="col">Free trial</div>
-            <div class="col">7 days</div>
-            <div class="col">7 days</div>
+            <div class="col">Personal Support</div>
+            <div class="col">Free</div>
+            <div class="col">Free</div>
+        </div>
+        <div class="row text-center border-top h3 py-2 mt-2 mb-0">
+            <div class="col">Bonus</div>
+            <div class="col">–</div>
+            <div class="col">VIP</div>
         </div>
         <div class="row text-center border-top border-bottom h3 py-2">
             <div class="col">Savings per year</div>

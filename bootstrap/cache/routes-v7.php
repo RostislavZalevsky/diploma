@@ -18,6 +18,26 @@ app('router')->setCompiledRoutes(
     0 => false,
     1 => 
     array (
+      '/uml' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'generated::0bypfoluppzZBvbT',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
       '/stripe/webhook' => 
       array (
         0 => 
@@ -43,7 +63,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::HWeGOJzDKxLQCINT',
+            '_route' => 'generated::FTx21t3BpemrW3tW',
           ),
           1 => NULL,
           2 => 
@@ -303,13 +323,51 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
+      '/create-payment' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'subscription.create',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/set-subscription' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'subscription.set',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
       '/webhook/stripe' => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'generated::dN1m66irVkJ84Pos',
+            '_route' => 'generated::TLtCBlK0X2U20jgv',
           ),
           1 => NULL,
           2 => 
@@ -328,7 +386,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::DZPLsVydu3m3rwMG',
+            '_route' => 'generated::8FgRrzeljPPN3KSX',
           ),
           1 => NULL,
           2 => 
@@ -434,6 +492,33 @@ app('router')->setCompiledRoutes(
   ),
   'attributes' => 
   array (
+    'generated::0bypfoluppzZBvbT' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'uml',
+      'action' => 
+      array (
+        'uses' => 'Andyabih\\LaravelToUML\\Http\\Controllers\\LaravelToUMLController@index',
+        'controller' => 'Andyabih\\LaravelToUML\\Http\\Controllers\\LaravelToUMLController@index',
+        'as' => 'generated::0bypfoluppzZBvbT',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+    ),
     'cashier.payment' => 
     array (
       'methods' => 
@@ -497,7 +582,7 @@ app('router')->setCompiledRoutes(
       'lockSeconds' => NULL,
       'waitSeconds' => NULL,
     ),
-    'generated::HWeGOJzDKxLQCINT' => 
+    'generated::FTx21t3BpemrW3tW' => 
     array (
       'methods' => 
       array (
@@ -512,15 +597,15 @@ app('router')->setCompiledRoutes(
           0 => 'api',
           1 => 'auth:api',
         ),
-        'uses' => 'C:32:"Opis\\Closure\\SerializableClosure":289:{@Hw79eXoEUKONdS0QBDTsI162eejHo8M6kf1jOtAWyFM=.a:5:{s:3:"use";a:0:{}s:8:"function";s:77:"function (\\Illuminate\\Http\\Request $request) {
+        'uses' => 'C:32:"Opis\\Closure\\SerializableClosure":289:{@fzxpRxdUDfzEfpPNRIreOil1LPjSVfP93UESNz7vkx4=.a:5:{s:3:"use";a:0:{}s:8:"function";s:77:"function (\\Illuminate\\Http\\Request $request) {
     return $request->user();
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"000000006b492bcc0000000060abca8c";}}',
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"000000004a3cf9e400000000208fcbb4";}}',
         'namespace' => NULL,
         'prefix' => 'api',
         'where' => 
         array (
         ),
-        'as' => 'generated::HWeGOJzDKxLQCINT',
+        'as' => 'generated::FTx21t3BpemrW3tW',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1073,7 +1158,79 @@ app('router')->setCompiledRoutes(
       'lockSeconds' => NULL,
       'waitSeconds' => NULL,
     ),
-    'generated::dN1m66irVkJ84Pos' => 
+    'subscription.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'create-payment',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\SubscriptionController@createPaymentSubscription',
+        'controller' => 'App\\Http\\Controllers\\SubscriptionController@createPaymentSubscription',
+        'namespace' => NULL,
+        'prefix' => NULL,
+        'where' => 
+        array (
+        ),
+        'as' => 'subscription.create',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+    ),
+    'subscription.set' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'set-subscription',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\SubscriptionController@setSubscription',
+        'controller' => 'App\\Http\\Controllers\\SubscriptionController@setSubscription',
+        'namespace' => NULL,
+        'prefix' => NULL,
+        'where' => 
+        array (
+        ),
+        'as' => 'subscription.set',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+    ),
+    'generated::TLtCBlK0X2U20jgv' => 
     array (
       'methods' => 
       array (
@@ -1093,7 +1250,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::dN1m66irVkJ84Pos',
+        'as' => 'generated::TLtCBlK0X2U20jgv',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1108,7 +1265,7 @@ app('router')->setCompiledRoutes(
       'lockSeconds' => NULL,
       'waitSeconds' => NULL,
     ),
-    'generated::DZPLsVydu3m3rwMG' => 
+    'generated::8FgRrzeljPPN3KSX' => 
     array (
       'methods' => 
       array (
@@ -1128,7 +1285,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::DZPLsVydu3m3rwMG',
+        'as' => 'generated::8FgRrzeljPPN3KSX',
       ),
       'fallback' => false,
       'defaults' => 

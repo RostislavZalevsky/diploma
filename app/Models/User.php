@@ -145,10 +145,10 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         return $this->hasManyThrough(Transaction::class, Subscription::class)->latest('paid_at');
     }
 
-    public function coupons()
-    {
-        return $this->belongsToMany(Coupon::class)->withPivot(['subscription_id', 'created_at']);
-    }
+//    public function coupons()
+//    {
+//        return $this->belongsToMany(Coupon::class)->withPivot(['subscription_id', 'created_at']);
+//    }
 
     public function setSubscription($payment_method, $payment_subscription_id, $amount, $period, $status = null, $statusUpdatedAt = null)
     {
