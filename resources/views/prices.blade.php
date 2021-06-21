@@ -17,8 +17,8 @@
         </div>
         <div class="row text-center">
             <div class="col"></div>
-            <div class="col"><a href="{{ route('subscription.index') }}" class="btn btn-danger">Start for free</a></div>
-            <div class="col"><a href="{{ route('subscription.index') }}" class="btn btn-danger">Start for free</a></div>
+            <div class="col"><a href="{{ route('subscription.index') }}" class="btn btn-danger">Select</a></div>
+            <div class="col"><a href="{{ route('subscription.index') }}" class="btn btn-danger">Select</a></div>
         </div>
         <div class="row text-center border-top h3 py-2 mt-2 mb-0">
             <div class="col">Free trial</div>

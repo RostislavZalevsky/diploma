@@ -9,6 +9,9 @@
         </div>
         <div class="row text-center">
             <h1>Welcome to Company</h1>
+            <div>
+                <a href="{{ route('prices.index') }}" class="btn btn-primary text-uppercase"><b>Get now</b></a>
+            </div>
         </div>
     </div>
 @endsection
