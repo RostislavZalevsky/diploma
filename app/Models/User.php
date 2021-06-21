@@ -11,15 +11,19 @@ use App\Models\Subscription\Transaction;
 use App\Notifications\Account\EmailVerificationNotification;
 use App\Notifications\Account\PasswordResetNotification;
 use App\Notifications\Account\WelcomeEmailNotification;
+use App\Traits\UsesUuid;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Cashier\Billable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles, Billable, UsesUuid, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

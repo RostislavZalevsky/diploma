@@ -12,7 +12,7 @@ class PasswordResetController extends Controller
 {
     public function index()
     {
-        return view('account.auth.forgot');
+        return view('account.forgot');
     }
 
     public function forgot(Request $request)
@@ -37,7 +37,7 @@ class PasswordResetController extends Controller
 
     public function resetForm($token, $email)
     {
-        return view('account.auth.reset', ['token' => $token, 'email' => $email]);
+        return view('account.reset', ['token' => $token, 'email' => $email]);
     }
 
     public function reset(Request $request)

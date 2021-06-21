@@ -480,11 +480,11 @@
       'smtp' => 
       array (
         'transport' => 'smtp',
-        'host' => 'mailhog',
-        'port' => '1025',
-        'encryption' => NULL,
-        'username' => NULL,
-        'password' => NULL,
+        'host' => 'smtp.gmail.com',
+        'port' => '587',
+        'encryption' => 'tls',
+        'username' => 'z.rostislav11@gmail.com',
+        'password' => 'veoqsxxgtzphpxvg',
         'timeout' => NULL,
         'auth_mode' => NULL,
       ),
@@ -517,7 +517,7 @@
     ),
     'from' => 
     array (
-      'address' => NULL,
+      'address' => 'z.rostislav11@gmail.com',
       'name' => 'Diploma',
     ),
     'markdown' => 
@@ -701,6 +701,22 @@
     'remote_sites_path' => '',
     'local_sites_path' => '',
     'housekeeping_endpoint_prefix' => '_ignition',
+  ),
+  'cashier' => 
+  array (
+    'key' => 'pk_test_51HL6MxK3lPTHUnkpnolhJpVOhcbWMYXABXZP51DAks9NyfTrilIdM0yYlzWAikVZ5honWreqVJtqEa6Adx59rhFF00s6UUlrXd',
+    'secret' => 'sk_test_51HL6MxK3lPTHUnkpj5Gq34Tk6QvQho0x4Jb7JPUu8xYs9LSaM3iSWtukkUNnMBL3AzpA94uDKDGM1sOhKxm7jQVm00J6EFNoMF',
+    'path' => 'stripe',
+    'webhook' => 
+    array (
+      'secret' => 'whsec_XbuDqhZzw8QnBu4WxEF6B5Aio6OtGWKM',
+      'tolerance' => 300,
+    ),
+    'currency' => 'usd',
+    'currency_locale' => 'en',
+    'payment_notification' => NULL,
+    'paper' => 'letter',
+    'logger' => NULL,
   ),
   'permission' => 
   array (

@@ -19,7 +19,7 @@ class LoginController extends Controller
 
         $this->clearAuth();
 
-        return view('account.auth.login');
+        return view('account.login');
     }
 
     public function login(Request $request)
@@ -70,11 +70,10 @@ class LoginController extends Controller
     private function defaultRoute()
     {
         return route(
-            Auth::user()->hasPlan()
-            && Auth::user()->isSubscribed()
+            Auth::user()->isSubscribed()
             && Auth::user()->subscription()->isActive()
-                ? 'profile.schedule'
-                : 'profile.subscription'
+                ? 'subscription.index'
+                : 'prices.index'
         );
     }
 }
