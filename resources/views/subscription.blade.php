@@ -17,26 +17,27 @@
             <div class="mb-3">
                 <label for="method" class="form-label">Payment method:</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="method" id="stripe" checked value="Credit/Debit Card">
+                    <input class="form-check-input" type="radio" name="method" id="stripe" checked value="card">
                     <label class="form-check-label" for="stripe">Debit/Credit Card</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="method" id="paypal" value="PayPal">
+                    <input class="form-check-input" type="radio" name="method" id="paypal" value="paypal">
                     <label class="form-check-label" for="paypal">PayPal</label>
                 </div>
             </div>
 
-            <div class="col-auto">
+            <div class="col-12 text-center">
                 <!-- Stripe -->
                 <div id="credit-card" class="credit-card__number"></div>
-                <div id="credit-card-errors" class="credit-card__errors" role="alert"></div>
+                <div id="credit-card-errors" class="credit-card__errors text-danger" role="alert"></div>
 
                 <!-- PayPal -->
-                <div id="paypal-payment" class="paypal-payment hidden"></div>
+                <div id="paypal-payment" class="d-none paypal-payment hidden"></div>
             </div>
 
-
-
+            <div class="col-12 text-center">
+                <button id="subscribe-button" type="button" class="btn btn-primary">Subscribe</button>
+            </div>
         </div>
     </form>
 @endsection
@@ -53,7 +54,7 @@
             createSubscription: function (data, actions) {
                 return actions.subscription.create({
                     'plan_id': createPaymentSubscription({
-                        period: $('[name="period"]:checked').attr('id'),
+                        period: $('[name="period"]').val(),
                         paymentMethod: 'PayPal',
                     }), // Creates the subscription
                     'application_context': {
@@ -72,24 +73,11 @@
 
         var style = {
             base: {
-                iconColor: '#c4f0ff',
-                color: '#fff',
-                fontWeight: 500,
-                fontFamily: '"Montserrat", sans-serif',
-                fontSize: '14px',
-                fontSmoothing: 'antialiased',
-                ':-webkit-autofill': {
-                    color: '#fff',
-                },
-                '::placeholder': {
-                    color: '#B2B7C4',
-                },
+                // Add your base input styles here. For example:
+                fontSize: '20px',
+                color: '#32325d',
             },
-            invalid: {
-                iconColor: '#FFC7EE',
-                color: '#FFC7EE',
-            },
-        }
+        };
 
         var card = elements.create('card', { style: style });
 
@@ -100,10 +88,9 @@
         });
 
         function displayError(event) {
-            return event.error && showToast({
-                text: event.error.message,
-                type: 'error',
-            });
+            $('#credit-card-errors').html(event.error.message);
+
+            return event.error;
         }
 
         $('#subscribe-button').on('click', function () {
@@ -122,18 +109,10 @@
                 if (result.error) {
                     displayError(result);
                 } else {
-                    if (!$('#agree').is(':checked')) {
-                        return showToast({
-                            text: 'You have to agree to a monthly charge for a minimum of 3 months.',
-                            type: 'error',
-                        });
-                    }
-
                     var result_created_subscription = createPaymentSubscription({
-                        period: $('[name="period"]:checked').attr('id'),
+                        period: $('[name="period"]').val(),
                         paymentMethod: 'Stripe',
-                        paymentMethodId: result.paymentMethod.id,
-                        coupon: coupon
+                        paymentMethodId: result.paymentMethod.id
                     });
 
                     if (!result_created_subscription.success) displayError(result_created_subscription.message);
@@ -194,7 +173,6 @@
                     period: period,
                     paymentMethod: paymentMethod,
                     paymentMethodId: paymentMethodId,
-                    coupon: coupon,
                     _token: '{{ csrf_token() }}'
                 },
                 async: false,
@@ -226,26 +204,24 @@
 
         // --- Actions on Billing page
         var $form = $('.container'),
-            $stripePayment = $form.find('#stripe-payment'),
+            $stripePayment = $form.find('#credit-card'),
             $paypalPayment = $form.find('#paypal-payment'),
             $subscribeButton = $form.find('#subscribe-button');
 
         $form.on('click', '[name="method"]', function () {
-            var method = $(this).attr('id');
+            var method = $(this).val();
 
             switch (method) {
-                case 'debit-credit':
-                    $paypalPayment.addClass('hidden');
-                    $stripePayment.removeClass('hidden');
-                    $subscribeButton.removeClass('hidden');
-                    $info.find('.method span').html('Debit / Credit card')
+                case 'card':
+                    $paypalPayment.addClass('d-none');
+                    $stripePayment.removeClass('d-none');
+                    $subscribeButton.removeClass('d-none');
                     break;
 
-                case 'paypal-system':
-                    $stripePayment.addClass('hidden');
-                    $paypalPayment.removeClass('hidden');
-                    $subscribeButton.addClass('hidden');
-                    $info.find('.method span').html('PayPal')
+                case 'paypal':
+                    $stripePayment.addClass('d-none');
+                    $paypalPayment.removeClass('d-none');
+                    $subscribeButton.addClass('d-none');
                     break;
             }
         });

@@ -61,7 +61,7 @@ class LoginController extends Controller
         return
             !empty(URL::previous())
             && !strpos(URL::previous(), 'login')
-            && !strpos(URL::previous(), 'signup')
+            && !strpos(URL::previous(), 'register')
             && !strpos(URL::previous(), 'email')
                 ? URL::previous()
                 : $this->defaultRoute();
