@@ -55,6 +55,9 @@
                     <div class="col">No Data.</div>
                 </div>
             @endisset
+
+            {{ Carbon\Carbon::now()->toDateTimeString() }}<br/>
+            {{ date('Y-m-d H:i:s') }}
         </div>
     </div>
 @endsection
