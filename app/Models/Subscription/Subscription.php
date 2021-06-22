@@ -128,6 +128,7 @@ class Subscription extends Model
 
     public function isActive(): bool
     {
+        return $this->status() == 'active';
         if ($this->status() == 'active')
             return true;
 
@@ -143,8 +144,8 @@ class Subscription extends Model
 
     public function isCancelled(): bool // TODO: missed webhook on localhost after 90 days
     {
-        return !$this->isActive() &&
-            in_array($this->subscriptionStatus()->first('payment_status')->payment_status, ['canceled', 'CANCELLED']);
+        return !$this->isActive();//&&
+            //in_array($this->subscriptionStatus()->first('payment_status')->payment_status, ['canceled', 'CANCELLED']);
     }
 
     public function canCancel(): bool
