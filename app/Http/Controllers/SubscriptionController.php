@@ -8,7 +8,6 @@ use App\Models\Subscription\PaymentMethod;
 use App\Models\Subscription\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use function Symfony\Component\String\u;
 
 class SubscriptionController extends Controller
 {
@@ -23,7 +22,7 @@ class SubscriptionController extends Controller
             $data['subscriber'] = $user->getSubscriptionDetails()['subscriber'];
             $data['subscription'] = $user->subscription();
             $data['canCancel'] = $user->subscription()->canCancel();
-            $data['transactions'] = $user->transactions();
+            $data['transactions'] = empty($user->transactions()) ? null : $user->transactions();
 
             return view('subscribed', $data);
         }
