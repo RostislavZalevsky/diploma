@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'America/Los_Angeles',
+    'timezone' => 'UTC',
     'date_format' => 'm/d/Y',
     'datetime_format' => 'm/d/Y  h:i A', // 'm/d/Y  h:i:s A',
 
