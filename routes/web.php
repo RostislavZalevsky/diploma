@@ -49,6 +49,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/create-payment', [SubscriptionController::class, 'createPaymentSubscription'])->name('subscription.create');
     Route::post('/set-subscription', [SubscriptionController::class, 'setSubscription'])->name('subscription.set');
 
+    Route::delete('/cancel-subscription', [SubscriptionController::class, 'cancel'])->name('subscription.cancel');
 
 });
 

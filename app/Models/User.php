@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Payment\PayPal;
 use App\Models\Payment\Stripe;
-use App\Models\Subscription\Coupon;
 use App\Models\Subscription\PaymentMethod;
 use App\Models\Subscription\Subscription;
 use App\Models\Subscription\Transaction;
@@ -144,11 +143,6 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
     {
         return $this->hasManyThrough(Transaction::class, Subscription::class)->latest('paid_at');
     }
-
-//    public function coupons()
-//    {
-//        return $this->belongsToMany(Coupon::class)->withPivot(['subscription_id', 'created_at']);
-//    }
 
     public function setSubscription($payment_method, $payment_subscription_id, $amount, $period, $status = null, $statusUpdatedAt = null)
     {

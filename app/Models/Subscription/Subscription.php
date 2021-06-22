@@ -98,15 +98,6 @@ class Subscription extends Model
             'status' => (in_array(mb_strtolower($paymentStatus), $statusPayment['active']) ? 'active' : 'inactive'),
         ];
 
-        if (in_array(mb_strtolower($paymentStatus), $statusPayment['cancelled']))
-        {
-            $plan = $this->user()->first()->plan();
-
-            $plan->updateExistingPivot($plan->first()->id, [
-                'deleted_at' => Carbon::now(),
-            ]);
-        }
-
         $s = $this->statuses()->create($attributes);
 
         if (isset($statusUpdatedAt)) {
@@ -158,29 +149,7 @@ class Subscription extends Model
 
     public function canCancel(): bool
     {
-        if ($this->isCancelled()) return false;
-
-        $trial = $this->user()->first()->trial();
-
-
-        if (isset($trial) && Carbon::parse($trial->expiration_at)->greaterThan(Carbon::today())) {
-            switch ($this->paymentMethod()->first('name')->name) {
-                case 'Stripe':
-                    $stripe = new Stripe();
-                    $s = $stripe->getSubscription($this->payment_subscription_id);
-                    $metadata = $s['plan']['metadata'];
-                    break;
-                case 'PayPal':
-                    $paypal = new PayPal();
-                    $s = $paypal->getSubscription($this->payment_subscription_id);
-                    $plan = $paypal->getPlan($s['plan_id']);
-                    $metadata = json_decode($plan['description'], true);
-                    break;
-            }
-        }
-
-        return (isset($metadata) && isset($metadata['trial']) && !empty($metadata['trial']) && $metadata['trial'] > 0)
-            || (diffInDays($this->createdAt) >= 90);
+        return !$this->isCancelled();
     }
 
     public function setTransaction($transaction_id, $amount, $paymentStatus, $paid_at, $receipt = null): Model
@@ -235,7 +204,7 @@ class Subscription extends Model
                 break;
             case 'Stripe':
                 $stripe = new Stripe();
-                $status = $stripe->cancelSubscription($this->payment_subscription_id);
+                $status = 'canceled'; //$stripe->cancelSubscription($this->payment_subscription_id);
                 $this->user()->first()->deletePaymentMethods();
                 $this->user()->first()->updateDefaultPaymentMethodFromStripe();
                 break;

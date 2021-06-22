@@ -6,9 +6,9 @@ use App\Models\Payment\PayPal;
 use App\Models\Payment\Stripe;
 use App\Models\Subscription\PaymentMethod;
 use App\Models\Subscription\Setting;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use function Symfony\Component\String\u;
 
 class SubscriptionController extends Controller
 {
@@ -16,18 +16,29 @@ class SubscriptionController extends Controller
     {
         $user = Auth::user();
 
-        $data = [
-            'user' => $user,
-            'paypal_client_id' => PayPal::getApiKey(),
-            'stripe_client_id' => Stripe::getApiKey(),
-            'premium_trial_days' => Setting::getValueByKey('premium_trial_days'),
-            'premium_month' => Setting::getValueByKey('premium_month'),
-            'premium_year' => Setting::getValueByKey('premium_year'),
-        ];
+        $data = ['user' => $user];
 
+        if ($user->isSubscribed() && $user->subscription()->isActive())
+        {
+            $data['subscriber'] = $user->getSubscriptionDetails()['subscriber'];
+            $data['subscription'] = $user->subscription();
+            $data['canCancel'] = $user->subscription()->canCancel();
+            $data['transactions'] = $user->transactions();
 
+            return view('subscribed', $data);
+        }
+        else
+        {
+            $data += [
+                'paypal_client_id' => PayPal::getApiKey(),
+                'stripe_client_id' => Stripe::getApiKey(),
+                'premium_trial_days' => Setting::getValueByKey('premium_trial_days'),
+                'premium_month' => Setting::getValueByKey('premium_month'),
+                'premium_year' => Setting::getValueByKey('premium_year'),
+            ];
 
-        return view('subscription', $data);
+            return view('subscription', $data);
+        }
     }
 
     public function createPaymentSubscription(Request $request)
@@ -115,5 +126,12 @@ class SubscriptionController extends Controller
         }
 
         return response()->json($json);
+    }
+
+    public function cancel()
+    {
+        Auth::user()->subscription()->cancelSubscription();
+
+        return redirect()->back()->with('success', 'Subscription cancelled successfully.');
     }
 }
