@@ -200,7 +200,7 @@ class Subscription extends Model
         {
             case 'PayPal':
                 $paypal = new PayPal();
-                $status = $paypal->cancelSubscription($this->payment_subscription_id);
+                $status = 'CANCELLED'; //$paypal->cancelSubscription($this->payment_subscription_id);
                 break;
             case 'Stripe':
                 $stripe = new Stripe();
