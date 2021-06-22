@@ -22,7 +22,7 @@ class SubscriptionController extends Controller
             $data['subscriber'] = $user->getSubscriptionDetails()['subscriber'];
             $data['subscription'] = $user->subscription();
             $data['canCancel'] = $user->subscription()->canCancel();
-            $data['transactions'] = $user->transactions();
+            $data['transactions'] = $user->transactions()->get();
 
             return view('subscribed', $data);
         }

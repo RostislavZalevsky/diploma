@@ -55,7 +55,6 @@
                     <div class="col">No Data.</div>
                 </div>
             @endisset
-            {{ json_encode($transactions) }}
         </div>
     </div>
 @endsection
